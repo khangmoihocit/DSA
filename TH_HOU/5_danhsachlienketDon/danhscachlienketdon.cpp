@@ -81,7 +81,7 @@ void InsertLast(SingleList &list, int d){
 }
 
 void InsertMid(SingleList &list, int pos, int d){
-    if(pos<0 || pos > SizeOfList(list)){ //kiểm tra vị trí truyền vô có hợp lệ k
+    if(pos<0 || pos >= SizeOfList(list)){ //kiểm tra vị trí truyền vô có hợp lệ k
         cout << "not valid position do insert\n";
     }
     if(pos == 0){
@@ -162,17 +162,18 @@ void xoatheodieukien(SingleList &l){
             // Xóa node đầu tiên
                 l.pHead = l.pHead->pNext;
                 delete pDel;
-            pDel = l.pHead;  // Cập nhật pDel sau khi xóa node
-        } else {
+                pDel = l.pHead;  // Cập nhật pDel sau khi xóa node
+            } else {
             // Xóa node ở giữa hoặc cuối
-            pPre->pNext = pDel->pNext;
-            delete pDel;
-            pDel = pPre->pNext;  // Cập nhật pDel sau khi xóa node
+                pPre->pNext = pDel->pNext;
+                delete pDel;
+                pDel = pPre->pNext;  // Cập nhật pDel sau khi xóa node
+            }
+        }else {
+            // Duyệt sang node tiếp theo nếu không xóa
+            pPre = pDel;
+            pDel = pDel->pNext;
         }
-    } else {
-        // Duyệt sang node tiếp theo nếu không xóa
-        pPre = pDel;
-        pDel = pDel->pNext;
     }
 }
 
@@ -194,7 +195,6 @@ int main(){
     PrintList(l);
     cout << "\n----\n";
 
-}
 
     PrintList(l);
     cout << endl;
@@ -203,3 +203,4 @@ int main(){
     // cout << endl << SizeOfList(l);
 
     return 0;
+}

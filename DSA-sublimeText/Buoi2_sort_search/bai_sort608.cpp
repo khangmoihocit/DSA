@@ -26,6 +26,7 @@ bool cmp(int a, int b){
 	}
 	return a < b;
 }
+//sort: O(NlogN)
 int main(){
 	int n; cin >> n;
 	int a[n];
