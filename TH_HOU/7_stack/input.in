@@ -1,11 +1,8 @@
-5
-lopa
-10
-lopb
-20
-lopc
-2
-lopa
-5
-lopa
-100
+push 3
+push 5
+show
+push 7
+show
+pop
+pop
+show

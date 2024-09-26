@@ -12,8 +12,8 @@ struct Node{
 };
 
 struct QUEUE{
-	Node *pFront;
-	Node *pRear;
+	Node *pFront; //đứng đầu
+	Node *pRear; //đứng cuối
 };
 
 void Initialize(QUEUE &queue){

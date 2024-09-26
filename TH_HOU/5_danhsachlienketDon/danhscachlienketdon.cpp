@@ -130,7 +130,6 @@ void RemoveNode(SingleList &list, int d){
                 pDel = NULL;
             }
         }
-
     }
 }
 

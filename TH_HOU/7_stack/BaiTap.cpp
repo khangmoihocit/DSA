@@ -5,7 +5,6 @@ using namespace std;
 #define vpi vector<pi>
 #define ppi pair<pi, int>
 using ll = long long;
-typedef FILE_STACK = "data.bin" 
 struct Class{
 	string name;
 	int numberOfStudents;
@@ -77,44 +76,45 @@ void PrintStack(STACK stack){
 	}
 }
 
-void FileOutput(){
-
-}
+// void FileOutput(){
+// 	fstream fileOutput("data.bin", ios::out | ios::binary);
+// 	if(fileOutput.is_open()){
+// 		while()
+// 		string n = "pham van khang";
+// 		fileOutput.write((char*)&n, sizeof(n));
+// 		fileOutput.close();
+// 		cout << "ghi file thanh cong\n";
+// 	}else{
+// 		cout << "loi khong ghi dc file";
+// 	}
+// }
 
 int main(){
-	// fstream fileOutput("data.bin", ios::out | ios::binary);
-	// if(fileOutput.is_open()){
-	// 	string n = "pham van khang";
-	// 	fileOutput.write((char*)&n, sizeof(n));
-	// 	fileOutput.close();
-	// 	cout << "ghi file thanh cong\n";
+
+
+	// fstream fileInput("data.bin", ios::in | ios::binary);
+	// if(fileInput.is_open()){
+	// 	string number;
+	// 	fileInput.read((char*)&number, sizeof(number));
+	// 	fileInput.close();
+	// 	cout << number;
 	// }else{
-	// 	cout << "loi khong ghi dc file";
+	// 	cout << "loi khong doc dc file";
 	// }
-
-	fstream fileInput(FILE_STACK, ios::in | ios::binary);
-	if(fileInput.is_open()){
-		string number;
-		fileInput.read((char*)&number, sizeof(number));
-		fileInput.close();
-		cout << number;
-	}else{
-		cout << "loi khong doc dc file";
+	STACK stack;
+	Initialize(stack);
+	int n; cin >> n;
+	for(int i=0; i<n; ++i){
+		cin.ignore();
+		string name; getline(cin, name);
+		int numberOfStudents; cin >> numberOfStudents;
+		Class cla;
+		cla.name = name;
+		cla.numberOfStudents = numberOfStudents;
+		them(stack, cla);
 	}
-	// STACK stack;
-	// Initialize(stack);
-	// int n; cin >> n;
-	// for(int i=0; i<n; ++i){
-	// 	cin.ignore();
-	// 	string name; getline(cin, name);
-	// 	int numberOfStudents; cin >> numberOfStudents;
-	// 	Class cla;
-	// 	cla.name = name;
-	// 	cla.numberOfStudents = numberOfStudents;
-	// 	them(stack, cla);
-	// }
 
-	// PrintStack(stack);
+	PrintStack(stack);
 
 	return 0;
 }
