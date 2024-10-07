@@ -131,73 +131,36 @@ void RemoveProductById(DoubleLinkedList &list, int id){
 	}
 }
 
-//đọc file
-DoubleLinkedList ReadFile(string fileName){
-	DoubleLinkedList list;
-	Initialize(list);
-
-	ifstream file(fileName, ios::binary);
-	if(file.is_open()){
-		Product product;
-		while(file.read((char*)&product, sizeof(Product))){
-			InsertLast(list, product);
-		}
-		file.close();
-	}else{
-		cout << "error opening file: " << fileName << endl;
-	}
-	return list;
-}
-
-//ghi file
-void WriteFile(DoubleLinkedList &list, string fileName){
-	ofstream file(fileName, ios::binary);
-	if(file.is_open()){
-		Node *pTmp = list.pHead;
-		while(pTmp != NULL){
-			file.write((char*)&pTmp->data, sizeof(pTmp->data));
-			pTmp = pTmp->pNext;
-		}
-		file.close();
-	}else{
-		cout << "error opening file: " << fileName << endl;
-	}
-}
-
 int main(){
 	DoubleLinkedList list;
 	Initialize(list);
-	// int n; cin >> n;
-	// for(int i=0; i<n; ++i){
-	// 	int id; cin >> id;
-	// 	cin.ignore();	
-	// 	string name; getline(cin, name);
-	// 	float price; cin >> price;
-	// 	Product product;
-	// 	product.id = id;
-	// 	product.name = name;
-	// 	product.price = price;
-	// 	InsertLast(list, product);
-	// }
+	int n; cin >> n;
+	for(int i=0; i<n; ++i){
+		int id; cin >> id;
+		cin.ignore();	
+		string name; cin >> name;
+		float price; cin >> price;
+		Product product;
+		product.id = id;
+		product.name = name;
+		product.price = price;
+		InsertLast(list, product);
+	}
 	cout << "danh sach vua nhap la: \n";
-	list = ReadFile("sanpham.bin");
 	PrintList(list);
 
-	//ghi file
-	// WriteFile(list, "sanpham.bin");
+	DoubleLinkedList listFilter = ListFilter(list, 5000, 6000);
+	cout << "danh sách sản phẩm: \n";
+	PrintList(listFilter);
 
-	// DoubleLinkedList listFilter = ListFilter(list, 5000, 6000);
-	// cout << "danh sách sản phẩm: \n";
-	// PrintList(listFilter);
+	SortListByPrice(list);
+	cout << "Danh sách sau khi sắp xếp là: \n";
+	PrintList(list);
 
-	// SortListByPrice(list);
-	// cout << "Danh sách sau khi sắp xếp là: \n";
-	// PrintList(list);
-
-	// cout << "xoas :\n";
-	// RemoveProductById(list, 1001);
-	// RemoveProductById(list, 1003);
-	// PrintList(list);
+	cout << "xoas :\n";
+	RemoveProductById(list, 1001);
+	RemoveProductById(list, 1003);
+	PrintList(list);
 
 
 	return 0;

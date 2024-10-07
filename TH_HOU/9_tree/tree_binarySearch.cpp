@@ -132,10 +132,10 @@ TNode *Search(BTree root, int value){
 
 //xóa node: có 3 TH
 void RemoveNode(BTree &root, int value){
-		return;
-	}
 	if(root == NULL){
 		cout << "cây rỗng\n";
+			return;
+	}
 	TNode *pParent = NULL;
 	TNode *pDel = NULL;
 	TNode *pTmp = root;
