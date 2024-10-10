@@ -33,25 +33,25 @@ void Push(STACK &stack, int d){
 	}
 }
 
-// int Pop(STACK &stack){
-// 	int d = stack->data;
-// 	Node *pDel = stack;
-// 	stack = stack->pLink;
-// 	pDel->pLink = NULL;
-// 	delete pDel;
-// 	pDel = NULL;
-// 	return d;
-// }
-
-Node * Pop(STACK &stack){
-	if(stack == NULL){
-		return NULL;
-	}
+int Pop(STACK &stack){
+	int d = stack->data;
 	Node *pDel = stack;
 	stack = stack->pLink;
 	pDel->pLink = NULL;
-	return pDel;
+	delete pDel;
+	pDel = NULL;
+	return d;
 }
+
+// Node * Pop(STACK &stack){
+// 	if(stack == NULL){
+// 		return NULL;
+// 	}
+// 	Node *pDel = stack;
+// 	stack = stack->pLink;
+// 	pDel->pLink = NULL;
+// 	return pDel;
+// }
 
 Node * Top(STACK stack){
 	return stack;
@@ -63,11 +63,11 @@ int main(){
 	Push(stack, 2);
 	Push(stack, 3);
 	// cout << Pop(stack);
-	Node *n = Pop(stack);
-	cout << n->data;
+	int n = Pop(stack);
+	cout << n;
 
-	Node *m = Pop(stack);
-	cout << m->data;
+	int m = Pop(stack);
+	cout << m;
 
 	return 0;
 }

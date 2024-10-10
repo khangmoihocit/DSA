@@ -9,7 +9,7 @@ const string FILE_NAME_SINHVIEN = "sinhvien.txt";
 int main(){
     DoubleLinkedList listLopHoc;
     InitializeLopHoc(listLopHoc);
-    BTree listSinhVien;
+    BSTree listSinhVien;
     InitializeSinhVien(listSinhVien);
 
     int choice;

@@ -12,9 +12,9 @@ struct TNode{
     TNode *pRight;
 };
 
-typedef TNode * BTree;
+typedef TNode * BSTree;
 
-void InitializeSinhVien(BTree &root){
+void InitializeSinhVien(BSTree &root){
     root = NULL;
 }
 
@@ -26,13 +26,13 @@ TNode * CreateTNode(SinhVien data){
     return pNode;
 }
 
-void InsertSinhVien(BTree &root, SinhVien data){
+void InsertSinhVien(BSTree &root, SinhVien data){
     TNode *pNode = CreateTNode(data);
     if(root == NULL){
         root = pNode;
     }else{
-        BTree tmp = root;
-        BTree parent = NULL;
+        BSTree tmp = root;
+        BSTree parent = NULL;
         while(tmp != NULL){
             parent = tmp;
             if(pNode->data.maSV > tmp->data.maSV){
@@ -49,7 +49,7 @@ void InsertSinhVien(BTree &root, SinhVien data){
     }
 }
 
-void InOrder_LNR(BTree root){
+void InOrder_LNR(BSTree root){
     if(root != NULL){
         InOrder_LNR(root->pLeft);
         cout << left << setw(15) << root->data.maSV << setw(20) << root->data.tenSV << endl;
