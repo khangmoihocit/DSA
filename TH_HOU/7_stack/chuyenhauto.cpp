@@ -1,6 +1,5 @@
 #include <bits/stdc++.h>
 using namespace std;
-using namespace std;
 
 // Hàm kiểm tra toán tử
 bool isOperator(char c) {
@@ -55,9 +54,10 @@ string infixToPostfix(string infix) {
 
 int main() {
 	string infixExpression;
+	cout << "nhập biểu thức trung tố: ";
   	getline(cin, infixExpression); // Nhập chuỗi biểu thức
   	string postfixExpression = infixToPostfix(infixExpression);
-  	cout << postfixExpression << endl;
+  	cout << "hậu tố: " << postfixExpression << endl;
   	return 0;
 }
 

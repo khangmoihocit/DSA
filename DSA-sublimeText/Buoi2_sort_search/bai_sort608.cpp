@@ -20,12 +20,14 @@ int soluong(int n){
 	}
 	return dem;
 }
+
 bool cmp(int a, int b){
 	if(soluong(a) != soluong(b)){
 		return soluong(a) > soluong(b);
 	}
 	return a < b;
 }
+
 //sort: O(NlogN)
 int main(){
 	int n; cin >> n;

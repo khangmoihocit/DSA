@@ -48,38 +48,55 @@ bool checkOperator(char op[]){
     return strcmp(op, "+") == 0 || strcmp(op, "-") == 0 || strcmp(op, "*") == 0 || strcmp(op, "/") == 0;
 }
 
-void cal(char s[]){
+void cal(char s[]) {
     STACK stack;
     initialize(stack);
     char *p = strtok(s, " "); // cắt xâu s theo dấu cách
     int result = 0;
 
-    while(p != NULL){
-        if(checkOperator(p)){
+    while (p != NULL) {
+        if (checkOperator(p)) {
+            if (stack == NULL) {
+                cout << "Error: Stack underflow\n";
+                return;
+            }
             int b = atoi(pop(stack));
+            if (stack == NULL) {
+                cout << "Error: Stack underflow\n";
+                return;
+            }
             int a = atoi(pop(stack));
-            if(strcmp(p, "+") == 0){
+            if (strcmp(p, "+") == 0) {
                 result = a + b;
-            }else if(strcmp(p, "-")){
+            } else if (strcmp(p, "-") == 0) {
                 result = a - b;
-            }else if(strcmp(p, "*")){
+            } else if (strcmp(p, "*") == 0) {
                 result = a * b;
-            }else if(strcmp(p, "/")){
+            } else if (strcmp(p, "/") == 0) {
+                if (b == 0) {
+                    cout << "Error: Division by zero\n";
+                    return;
+                }
                 result = a / b;
             }
             char tmp[MAX]; //cần phải khai 1 mảng đủ lớn để chứa cả kí tự '\0'
             sprintf(tmp, "%d", result); //chuyển result(int) sang tmp(xâu);
             push(stack, tmp);
-        }else{
+        } else {
             push(stack, p);
         }
-        p = strtok(NULL, " "); 
+        p = strtok(NULL, " ");
     }
-
-    cout << "ket qua cua bieu thuc la: " << result << endl;
+    if (stack != NULL) {
+        cout << "ket qua cua bieu thuc la: " << atoi(pop(stack)) << endl;
+    } else {
+        cout << "Error: Invalid expression\n";
+    }
 }
 
+
 int main(){
-    char s[] = "5 10 + 2 * 3 /"; //k cần khai báo kích thước trước, cách lấy kích thước mảng char size_t s = sizeof(s)
-    cal(s);
+    char s[] = "5 10 + 2 * 3 /";
+    char ss[] = "3 2 + 2 * 3 4 2 - / - 4 -"; //k cần khai báo kích thước trước, cách lấy kích thước mảng char size_t s = sizeof(s)
+    cal(ss);
 }
