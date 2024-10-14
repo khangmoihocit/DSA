@@ -133,3 +133,33 @@ void TimTheoMaLop(DoubleLinkedList list){
         cout << left << setw(20) << pNode->data.maLop << setw(20) << pNode->data.tenLop << endl;
     }  
 }
+
+// DoubleLinkedList searchLopHocById(DoubleLinkedList list, int maLop){
+//     DoubleLinkedList listById;
+//     initializeLopHoc(listById);
+
+//     Node *pTmp = list.pHead;
+//     while(pTmp != NULL){
+//         if(pTmp->data.maLop == maLop){
+//             insertLastLopHoc(listById);
+//         }
+//         pTmp = pTmp->pNext;
+//     }
+//     return listById;
+// }
+
+// void timLopHocTheoMa(DoubleLinkedList list){
+//     int maLop;
+//     cout << "Nhập mã lớp: "; cin >> maLop;
+//     if(list.pHead == NULL){
+//         cout << "không tìm thấy.\n";
+//         return;
+//     }
+
+//     DoubleLinkedList listById = searchLopHocById(list, maLop);
+//     if(listById.pHead == NULL){
+//         cout << "không tìm thấy.\n";
+//     }else{
+//         printListLopHoc(listById);
+//     }
+// }
