@@ -260,7 +260,9 @@ void ReadFileLopHoc(DoubleLinkedList &list, string fileName){
 void timKiemLopHoc(DoubleLinkedList list){ //tim kiem lop hoc theo ma
     int maLop;
     cout << "Nhập mã lớp muốn tìm: "; cin >> maLop;
+
     NodeLopHoc *pNode = searchLopById(list, maLop);
+    
     if(pNode == NULL){
         cout << "không tìm thấy.";
     }else{
@@ -286,6 +288,7 @@ void addSinhVien_LopHoc(DoubleLinkedList listLopHoc){ //thêm 1 sinh viên vô 1
     if(pNodeLopHoc != NULL){
         SinhVien sinhVien = inputSinhVien();
         insertSinhVien(pNodeLopHoc->rootSinhVien, sinhVien);
+        cout << "-> Thêm thành công sinh viên vào lớp " << pNodeLopHoc->data.maLop << "\n";
     }
 }
 
