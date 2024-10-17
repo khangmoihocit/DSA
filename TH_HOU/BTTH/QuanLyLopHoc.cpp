@@ -46,7 +46,8 @@ void ReadFileLopHoc(DoubleLinkedList &list, string fileName);
 void menu();
 
 int main(){
-    DoubleLinkedList listLopHoc; initializeLopHoc(listLopHoc);
+    DoubleLinkedList listLopHoc; 
+    initializeLopHoc(listLopHoc);
     int chon;
     do{
         menu();
