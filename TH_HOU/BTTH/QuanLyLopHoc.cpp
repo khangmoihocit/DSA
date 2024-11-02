@@ -135,6 +135,14 @@ void inOrder_LNR(BSTree root){
     }
 }
 
+int countNode(BSTree root){
+    if(root == NULL){
+        return 0;
+    }else{
+        return (1 + countNode(root->pLeft) + countNode(root->pRight));
+    }
+}
+
 void printListSinhVien(BSTree root){
     if(root != NULL){
         cout << left  << setw(20) << "Mã sinh viên" << setw(20) << "tên sinh viên" << endl;
@@ -293,19 +301,15 @@ void addSinhVien_LopHoc(DoubleLinkedList listLopHoc){ //thêm 1 sinh viên vô 1
     }
 }
 
-BSTree getListSinhVien_LopHoc(DoubleLinkedList listLopHoc, int maLop){ // laay danh sách sinh viên từ 1 lớp
-    NodeLopHoc *pNodeLopHoc = searchLopById(listLopHoc, maLop);
-    if(pNodeLopHoc == NULL){
-        cout << "không tìm thấy lớp học!\n";
-        return NULL;
-    }
-    return pNodeLopHoc->rootSinhVien;
-}
-
 void printListSinhVien_LopHoc(DoubleLinkedList listLopHoc){ //hien danh sach sinh vien tu 1 lop
     int maLop;
     cout << "nhập mã lớp muốn xem danh sách sinh viên: ";
     cin >> maLop;
-    BSTree rootSinhVien = getListSinhVien_LopHoc(listLopHoc, maLop);
-    printListSinhVien(rootSinhVien);
+    NodeLopHoc *pNodeLopHoc = searchLopById(listLopHoc, maLop);
+    if(pNodeLopHoc == NULL){
+        cout << "không tìm thấy lớp học!\n";
+    }else{
+        BSTree rootSinhVien = pNodeLopHoc->rootSinhVien;
+        printListSinhVien(rootSinhVien);
+    }
 }

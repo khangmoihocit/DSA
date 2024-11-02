@@ -1,0 +1,10 @@
+vector<int> a(10): khai bao mang voi 10 phan tu
+
+a.push_pack(100): khai bao phan tu mang voi gia tri la 100
+a.pop_back() : xoa phan tu o cuoi vector
+a.size(): so luong phan tu trong mang
+
+a.begin()+x =a[x]
+vector<int>iterator it = auto
+
+erase: xoa phan tu, do phuc tap 0(n) khong nen dung

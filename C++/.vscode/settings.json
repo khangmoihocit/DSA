@@ -1,8 +1,6 @@
 {
-    "C_Cpp.errorSquiggles": "disabled",
     "files.associations": {
         "iostream": "cpp",
-        "list": "cpp",
         "any": "cpp",
         "array": "cpp",
         "atomic": "cpp",
@@ -37,6 +35,7 @@
         "cwctype": "cpp",
         "deque": "cpp",
         "forward_list": "cpp",
+        "list": "cpp",
         "map": "cpp",
         "set": "cpp",
         "string": "cpp",
@@ -92,5 +91,6 @@
         "typeinfo": "cpp",
         "valarray": "cpp",
         "variant": "cpp"
-    }
+    },
+    "C_Cpp.errorSquiggles": "disabled"
 }
