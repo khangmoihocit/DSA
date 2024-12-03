@@ -3,6 +3,7 @@ using namespace std;
 //SinhVien: cay nhi phan tim kiem
 //LopHoc: danh sach lien ket doi
 
+
 struct SinhVien{
     int maSV;
     char tenSV[250];
@@ -313,3 +314,4 @@ void printListSinhVien_LopHoc(DoubleLinkedList listLopHoc){ //hien danh sach sin
         printListSinhVien(rootSinhVien);
     }
 }
+

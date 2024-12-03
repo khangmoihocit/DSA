@@ -15,7 +15,7 @@ struct BenhNhan{
 	int tuoiBN;
 	char gioiTinh[30]; //chi nhan 'nam' hoac 'nu'
 	char diaChi[250];
-	char trieuChung[250];
+	char lichSuBenhAn[250];
 };
 
 //benh nhan: cay nhi phan tim kiem
@@ -50,6 +50,7 @@ BenhNhan InputBenhNhan();
 void WriteFileBenhNhan(BSTree root, string fileName); //ghi file
 void ReadFileBenhNhan(BSTree &root, string fileName); //doc file
 NodeBenhNhan * SearchBenhNhanById(BSTree root, int maBN);
+void RemoveBenhNhanByMaBN(BSTree &root, int maBN); //xoa benh nhan
 //bac sy
 void menuBacSy();
 void quanLyBacSy(DoubleLinkedList &list, int &chon);
@@ -60,8 +61,8 @@ BacSy InputBacSy();
 void PrintBacSy(BacSy data);
 void WriteFileBacSy(DoubleLinkedList list, string fileName); //ghi file
 void ReadFileBacSy(DoubleLinkedList &list, string fileName); //doc file
-NodeBacSy * SearchBacSyById(DoubleLinkedList list, int maBS);
-void RemoveBacSyByName(DoubleLinkedList &list, char tenBS[]);
+NodeBacSy * SearchBacSyById(DoubleLinkedList list, int maBS); // tim kiem
+void RemoveBacSyByName(DoubleLinkedList &list, char tenBS[]);// xoa bac sy
 
 int main(){
 	BSTree root;
@@ -86,7 +87,7 @@ int main(){
 			quanLyBenhNhan(root, chon2);
 		}else{
 			cout << "coming soon!\n";
-		}
+		} 
 	}while(chon1 != 7 || chon2 != 10);
 	return 0;
 }
@@ -127,13 +128,13 @@ void quanLyBenhNhan(BSTree &root, int &chon){
 				cout << setw(10) << "ma BN" << setw(20) << "ten BN" << setw(10) << "tuoi BN" << setw(10) << "gioi tinh" << setw(20) << "dia chi"
 					<< setw(20) << "trieu chung" << endl;
 				cout << setw(10) << pNode->data.maBN << setw(20) << pNode->data.tenBN << setw(10) << pNode->data.tuoiBN << setw(10) << pNode->data.gioiTinh
-					<< setw(20) << pNode->data.diaChi << setw(20) << pNode->data.trieuChung << endl;
+					<< setw(20) << pNode->data.diaChi << setw(20) << pNode->data.lichSuBenhAn << endl;
 			}
 			break;
-		}
-			
+		}			
 		case 6:{
-			cout << "coming soon!\n";
+			int maBN; cout << "nhap ma benh nhan muon xoa: "; cin >> maBN;
+			RemoveBenhNhanByMaBN(root, maBN);
 			break;
 		}
 			
@@ -192,7 +193,7 @@ void InOrder_LNR(BSTree root){
 	if(root != NULL){
 		InOrder_LNR(root->pLeft);
 		cout << setw(10) << root->data.maBN << setw(20) << root->data.tenBN << setw(10) << root->data.tuoiBN << setw(10) << root->data.gioiTinh
-		<< setw(20) << root->data.diaChi << setw(20) << root->data.trieuChung << endl;
+		<< setw(20) << root->data.diaChi << setw(20) << root->data.lichSuBenhAn << endl;
 		InOrder_LNR(root->pRight);
 	}
 }
@@ -239,7 +240,7 @@ BenhNhan InputBenhNhan(){
 		}
 	}
 	cout << "nhap dia chi: "; cin.getline(benhNhan.diaChi, 30);
-	cout << "nhap trieu chung: "; cin.getline(benhNhan.trieuChung, 250);
+	cout << "nhap trieu chung: "; cin.getline(benhNhan.lichSuBenhAn, 250);
 	return benhNhan;
 }
 
@@ -264,6 +265,7 @@ void WriteFileBenhNhan(BSTree root, string fileName){
 			}
 		}
 		cout << "ghi file thanh cong.\n";
+		file.close();
 	}else{
 		cout << "khong the mo file de ghi!\n";
 	}
@@ -281,14 +283,86 @@ void ReadFileBenhNhan(BSTree &root, string fileName){
 			InsertBenhNhan(root, benhNhan);
 		}
 		cout << "doc file thanh cong.\n";
+		file.close();
 	}else{
 		cout << "khong the mo file de doc.\n";
 	}
 }
 
-void RemoveBenhNhanByMaBN(BSTree &root, int maBN){
-	
+void RemoveBenhNhanByMaBN(BSTree &root, int maBN) {
+    if (root == NULL) {
+        cout << "Danh sach benh nhan rong.\n";
+        return;
+    }
+
+    NodeBenhNhan *parent = NULL;
+    NodeBenhNhan *current = root;
+
+    // Find the node to be deleted and its parent
+    while (current != NULL && current->data.maBN != maBN) {
+        parent = current;
+        if (maBN < current->data.maBN) {
+            current = current->pLeft;
+        } else {
+            current = current->pRight;
+        }
+    }
+
+    if (current == NULL) {
+        cout << "Khong ton tai benh nhan co ma " << maBN << ".\n";
+        return;
+    }
+
+    // Case 1: Node to be deleted has no children (leaf node)
+    if (current->pLeft == NULL && current->pRight == NULL) {
+        if (current != root) {
+            if (parent->pLeft == current) {
+                parent->pLeft = NULL;
+            } else {
+                parent->pRight = NULL;
+            }
+        } else {
+            root = NULL;
+        }
+        delete current;
+    }
+    // Case 2: Node to be deleted has two children
+    else if (current->pLeft && current->pRight) {
+        NodeBenhNhan *successor = current->pRight;
+        NodeBenhNhan *successorParent = current;
+
+        while (successor->pLeft != NULL) {
+            successorParent = successor;
+            successor = successor->pLeft;
+        }
+
+        if (successorParent != current) {
+            successorParent->pLeft = successor->pRight;
+        } else {
+            successorParent->pRight = successor->pRight;
+        }
+
+        current->data = successor->data;
+        delete successor;
+    }
+    // Case 3: Node to be deleted has only one child
+    else {
+        NodeBenhNhan *child = (current->pLeft) ? current->pLeft : current->pRight;
+
+        if (current != root) {
+            if (current == parent->pLeft) {
+                parent->pLeft = child;
+            } else {
+                parent->pRight = child;
+            }
+        } else {
+            root = child;
+        }
+        delete current;
+    }
+    cout << "Xoa thanh cong.\n";
 }
+
 //code bac sy
 void menuBacSy(){
 	cout << "1. them bac sy.\n";	
@@ -486,6 +560,6 @@ void RemoveBacSyByName(DoubleLinkedList &list, char tenBS[]){
 	}
 	delete pDel;
 	pDel = NULL;
-}
+} 
 
 

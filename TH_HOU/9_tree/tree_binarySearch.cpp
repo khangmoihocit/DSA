@@ -234,7 +234,7 @@ int main(){
 		cout << "\nnot found\n";
 	}
 
-	RemoveNode(root, 20);
+	RemoveNode(root, 15);
 	PreOrder_NLR(root);
 
 	return 0;
